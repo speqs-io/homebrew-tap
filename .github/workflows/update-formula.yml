@@ -1,0 +1,26 @@
+name: Update Formula
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        type: string
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update formula
+        run: |
+          URL="https://registry.npmjs.org/speqs/-/speqs-${{ inputs.version }}.tgz"
+          SHA=$(curl -sL "$URL" | shasum -a 256 | cut -d' ' -f1)
+          sed -i "s|url \".*\"|url \"$URL\"|" Formula/speqs.rb
+          sed -i "s|sha256 \".*\"|sha256 \"$SHA\"|" Formula/speqs.rb
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/speqs.rb
+          git commit -m "Update speqs to ${{ inputs.version }}"
+          git push

@@ -1,8 +1,8 @@
 class Speqs < Formula
   desc "The command-line interface for Speqs"
   homepage "https://speqs.io"
-  url "https://registry.npmjs.org/speqs/-/speqs-0.1.0.tgz"
-  sha256 "863b00787c6b4b929a617944441f58c8362f302b742c3177e94a774d26c69123"
+  url "https://registry.npmjs.org/speqs/-/speqs-0.1.1.tgz"
+  sha256 "c496a06c479b2a7524f592d293e5b89ffa0098fc430d9f39ad28c6ac970e43ed"
   license :cannot_represent
 
   depends_on "node"
